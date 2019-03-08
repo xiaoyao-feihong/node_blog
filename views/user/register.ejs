@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/views/user/register.css">
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="wrap">
+        <form class="navbar-form navbar" role="search">
+            <h3>注册界面</h3>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="昵称" name="nickname">
+                <input type="text" class="form-control" placeholder="用户名" name="username">
+                <input type="password" class="form-control" placeholder="密码" name="password">
+                <input type="button" value="注册" class="register">
+            </div>
+        </form>
+        <div class="tip">
+            <p></p>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $('.register').on('click', function () {
+                // 获取input数组
+                var inputArr = Array.prototype.slice.call(document.getElementsByClassName('form-control'), 0)
+                // 获取为空的数组
+                var voidArr = inputArr.filter(function (elem) {
+                    // 为空的框变红
+                    elem.value === '' ? '' : elem.style.borderColor = '#ccc'
+                    return elem.value === ''
+                })
+                // 判断都不为空，则flag为true
+                var flag = inputArr.every(function (elem) {
+                    return elem.value !== ''
+                })
+
+                if (flag) {
+                    // 都不为空发送请求
+                    console.log($('form').serialize())
+                    $.ajax({
+                        url: 'http://127.0.0.1:3000/register',
+                        type: 'post',
+                        dataType: 'json',
+                        // 获取表单序列化数据
+                        data: $('form').serialize(),
+                        success: function (result) {
+                            console.log(result)
+                            if (result.status === 200) {
+                                // 创建成功后，告诉用户注册成功
+                                $('.tip').css('display', 'block').children().html(result.msg + '!')
+                                // 1.5秒后提示消失
+                                setTimeout(function () {
+                                    $('.tip').fadeIn(1500).css('display', 'none')
+                                    window.location.href = '/login'
+                                }, 1500)
+                            }else{
+                                 // 提示用户信息已经存在，重新填写
+                                 $('.tip').css('display', 'block').children().css('color','red').html(result.msg + '!')
+                                // 1.5秒后提示消失
+                                setTimeout(function () {
+                                    $('.tip').fadeIn(1500).css('display', 'none')
+                                }, 1500)
+                            }
+                        }
+                    })
+                } else {
+                    // 存在为空的框，优先提示
+                    $('.tip').css({'display':  'block'}).children().css('color', 'red').html(voidArr[0].placeholder + '不能为空' + '!')
+                    // 为空的第一个框变红
+                    voidArr[0].style.borderColor = 'red'
+                    setTimeout(function () {
+                        $('.tip').fadeIn(1500).css('display', 'none')
+                    }, 1500)
+                }
+            })
+        })
+    </script>
+
+</body>
+
+</html>

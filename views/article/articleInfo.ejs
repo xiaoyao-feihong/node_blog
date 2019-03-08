@@ -1,0 +1,83 @@
+<%- include('../layout/header.ejs') %>
+
+<div class="container">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">我的文章列表</div>
+        <!-- <div class="panel-body">
+            <p>...</p>
+        </div> -->
+
+        <!-- Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>标题</th>
+                    <th>创建时间</th>
+                    <th>功能</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% articles.forEach(function(item){
+                    %>
+                <tr>
+                    <td>
+                        <a href="/article/browseArticle/<%= item.id %>"><%= item.title %></a>
+                    </td>
+                    <td><%= item.ctime %></td>
+                    <td>
+                        <a type="button" class="btn btn-info edit" href="/article/edit/<%= item.id %>">编辑</a>
+                        <a type="button" class="btn btn-primary deleteBtn" articleId="<%= item.id %>">删除</a>
+                    </td>
+                </tr>
+                <%
+                })%>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 分页区域 -->
+<nav aria-label="Page navigation" class="text-center">
+    <ul class="pagination">
+        <li class="<%= (nowPage - 1) < 1 ? 'disabled' : '' %>">
+            <<%= (nowPage - 1) < 1 ? 'span' : 'a' %> href="/article/article_info?page=<%= (nowPage - 1) < 1 ? 1 : (nowPage - 1) %>"
+                aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </<%= (nowPage - 1) < 1 ? 'span' : 'a' %>>
+        </li>
+        <%  for(var i = 0;i < pageCount; i++){
+        %>
+        <li class="<%= nowPage === (i+1) ? 'active' : '' %>"><a href="/article/article_info?page=<%= i+1 %>"><%= i+1 %></a></li>
+        <%
+      }
+      %>
+        <li class="<%= (nowPage + 1) > pageCount ? 'disabled' : '' %>">
+            <<%= (nowPage + 1) > pageCount ? 'span' : 'a' %>
+                href="/article/article_info?page=<%= (nowPage + 1) > pageCount ? pageCount : (nowPage + 1) %>" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </<%= (nowPage + 1) > pageCount ? 'span' : 'a' %>>
+        </li>
+        <li><a href="/">返回首页</a></li>
+    </ul>
+</nav>
+
+<script>
+    $(function () {
+        $('.deleteBtn').on('click', function (e) {
+            var flag = confirm('文章一经删除,无法还原,确定删除吗?')
+            console.log(e.target.getAttribute('articleId'))
+            if (flag) {
+                $.ajax({
+                    url: '/article/delete/' + e.target.getAttribute('articleId'),
+                    type: 'get',
+                    success: function (result) {
+                        location.reload()
+                    }
+                })
+            }
+        })
+    })
+</script>
+
+<%- include('../layout/footer.ejs') %>

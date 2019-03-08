@@ -1,0 +1,48 @@
+
+
+.navbar-header > .navbar-brand {
+    color: rgb(23, 231, 238);
+}
+
+.navbar-header a.navbar-brand:hover {
+    color: rgb(238, 66, 66)
+}
+
+.navbar.navbar-default {
+    background-color: rgba(0,0,0,.5);
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: black;
+}
+
+.nav.navbar-nav.navbar-right .dropdown-menu > li > a {
+    color: black;
+}
+
+.nav.navbar-nav.navbar-right .dropdown-menu > li > a:hover {
+    color: rgb(223, 64, 64);
+}
+
+.modal.in .modal-dialog {
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%); */
+    margin-top: 200px;
+    transform: translateY(-50%);
+}
+
+.modal-header {
+    border: none;
+}
+
+.modal-footer {
+    border: none;
+}
+
+.modal-title > p {
+    padding-left: 30px;
+    color: rgb(243, 19, 19);
+    font-weight: bold;
+}

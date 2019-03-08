@@ -1,0 +1,22 @@
+.btn.btn-primary.save {
+    float: right;
+    width: 300px;
+    height: 40px;
+}
+
+.tiplayer {
+    position: absolute;
+    height: 90px;
+    width: 400px;
+    top: 50%;
+    left: 50%;
+    line-height: 90px;
+    text-align: center;
+    transform: translateX(-50%) translateY(-50%);
+    border: 1px solid rgb(243, 166, 50);
+    font-size: 26px;
+    font-weight: bold;
+    background-color: #ccc;
+    display: none;
+    color: red;
+}

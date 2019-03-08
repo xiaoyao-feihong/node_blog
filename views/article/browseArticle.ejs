@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            background-image: url(/views/article/img/sea.jpeg);
+            background-size: 100% 100%;
+            position: relative;
+            background-repeat:no-repeat; 
+            background-attachment:fixed
+        }
+
+        .navbar.navbar-default.navbar-static-top {
+            background-color: transparent;
+            border: none;
+        }
+
+        .anchor {
+            height: 200px;
+            width: 120px;
+            /* border: 1px solid red; */
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .anchor ul {
+            height: 100%;
+            width: 100%;
+            list-style: none;
+            /* border: 1px solid yellow; */
+        }
+
+        .anchor ul li {
+            height: 33.33%;
+            width: 100%;
+            /* border: 1px solid green; */
+            line-height: 65px;
+            text-align: center;
+        }
+
+        .anchor ul li a {
+            color: rgb(243, 131, 26);
+            font-size: 18px;
+        }
+
+        .container > h1 {
+            margin-bottom: 60px;
+        }
+
+        .wrap {
+            color: #424242;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="container">
+        <h1 class="text-center"><%= article.title %></h1>
+        <div class="wrap text-center">
+            <%- article.content %>
+        </div>
+    </div>
+
+
+    <div class="anchor">
+        <ul>
+            <li><a href="/">返回首页</a></li>
+            <li><a href="#top">到头部</a></li>
+            <li><a href="#bottom">到页面底部</a></li>
+        </ul>
+    </div>
+
+    <div class="text-center" id="bottom" style="color: #e92322;margin-top: 100px;">飞鸿程序员交流博客 &copy; 2019</div>
+</body>
+
+</html>

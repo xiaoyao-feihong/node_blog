@@ -1,0 +1,72 @@
+<%- include('../layout/header.ejs') %>
+<link rel="stylesheet" href="/node_modules/mditor/dist/css/mditor.min.css">
+<link rel="stylesheet" href="/views/article/css/add.css">
+<script src="/node_modules/mditor/dist/js/mditor.min.js"></script>
+
+<div class="container">
+  <h2>编辑发表页面</h2>
+  <hr>
+
+  <form action="" id="form">
+    <!-- 使用隐藏域将用户id传递到后端 -->
+    <input type="hidden" name="authorid" value="<%= user.id %>">
+    <input type="hidden" name="id" value="<%= insertId %>">
+    <div class="form-group">
+      <label for="">文章标题：</label>
+      <input type="text" name="title" class="form-control" required value="<%= article.title %>">
+    </div>
+
+    <div class="form-group">
+      <label for="">文章内容：</label>
+      <textarea name="content" class="form-control" id="editor" required><%- article.content %></textarea>
+    </div>
+
+    <div class="form-group ">
+      <input type="submit" value="保存更改" class="btn btn-primary save">
+    </div>
+  </form>
+
+  <div class="tiplayer"></div>
+</div>
+
+
+<script>
+  $(function () {
+    // 初始化mditor
+    var mditor = Mditor.fromTextarea(document.getElementById('editor'));
+
+    //获取或设置编辑器的值
+    mditor.on('ready', function () {
+      // mditor.value = "";
+    })
+
+    // 保存文章的提交功能
+    $('#form').on('submit', function (e) {
+      e.preventDefault()
+      $.ajax({
+        url: '/article/edit',
+        type: 'POST',
+        dataType: 'json',
+        data: $('#form').serialize(),
+        success: function (result) {
+          console.log(result)
+          if (result.status !== 200) {
+            $('.tiplayer').css('display', 'block').html(result.msg)
+            setTimeout(function () {
+              $('.tiplayer').css('display', 'none')
+            }, 1500)
+          } else {
+            $('.tiplayer').css('display', 'block').html(result.msg)
+            setTimeout(function () {
+              $('.tiplayer').css('display', 'none')
+              location.href = '/article/article_info'
+            }, 1500)
+          }
+        }
+      })
+    })
+
+  })
+</script>
+
+<%- include('../layout/footer.ejs') %>

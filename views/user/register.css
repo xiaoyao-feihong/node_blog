@@ -1,0 +1,76 @@
+body {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.8);
+}
+
+.wrap {
+    height: 430px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.form-group .form-control {
+    display: block;
+    margin-bottom: 30px;
+    min-width: 375px;
+}
+
+.navbar-form.navbar {
+    height: 100%;
+    border: 1px solid rgb(231, 98, 8);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.navbar-form.navbar > h3 {
+    text-align: center;
+    padding-bottom: 35px;
+}
+
+.register {
+    width: 260px;
+    height: 35px;
+    display: block;
+    color: white;
+    border: 1px solid rgb(9, 125, 179);
+    background-color: rgba(9, 125, 179,.6);
+    border-radius: 4px;
+    outline: none;
+    margin: 0 auto;
+    transition: all linear .6s ease-in;
+}
+
+.register:hover {
+    background-color: rgb(132, 196, 233);
+    font-size: 17px;
+}
+
+.tip {
+    height: 60px;
+    width: 360px;
+    position: absolute;
+    border: 1px solid rgba(33, 189, 236, 0.925);
+    top: 34%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    display: none;
+    transition: all 1s ease-in;
+}
+
+.tip p {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    color: rgb(14, 139, 223);
+    line-height: 58px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgba(247, 147, 16,.7);
+}
